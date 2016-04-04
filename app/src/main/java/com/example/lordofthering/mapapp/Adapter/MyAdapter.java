@@ -85,15 +85,12 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
     public Filter getFilter() {
 
 
-        return new PlanetFilter();
+        return new RestFilter();
     }
 
 
 
-    private class PlanetFilter extends Filter {
-
-
-
+    private class RestFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -105,15 +102,15 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
             }
             else {
                 // We perform filtering operation
-                List<PojoForList> nPlanetList = new ArrayList<>();
+                List<PojoForList> nRestList = new ArrayList<>();
 
                 for (PojoForList p : restList) {
                     if (p.getTitle().toUpperCase().startsWith(constraint.toString().toUpperCase()))
-                        nPlanetList.add(p);
+                        nRestList.add(p);
                 }
 
-                results.values = nPlanetList;
-                results.count = nPlanetList.size();
+                results.values = nRestList;
+                results.count = nRestList.size();
 
             }
             return results;
