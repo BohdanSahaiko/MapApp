@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.lordofthering.mapapp.MapsActivity">
+    <item
+        android:id="@+id/action_mapss"
+        android:orderInCategory="100"
+        android:title="@string/Find_on_maps"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        app:showAsAction="always" />
+</menu>

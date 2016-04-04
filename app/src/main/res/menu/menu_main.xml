@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.lordofthering.lviv.Main">
+    <item
+        android:id="@+id/action_settingsss"
+        android:orderInCategory="100"
+        android:title="@string/Like"
+        app:showAsAction="never" />
+
+    <item
+    android:id="@+id/action_map"
+    android:orderInCategory="100"
+    android:title="@string/Find_on_maps"
+        android:icon="@android:drawable/ic_menu_mapmode"
+    app:showAsAction="always" />
+
+    <item   android:id="@+id/action_search"
+        android:title="@android:string/search_go"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+</menu>

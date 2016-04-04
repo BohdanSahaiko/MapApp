@@ -1,0 +1,75 @@
+package com.example.lordofthering.mapapp.Adapter;
+
+import android.graphics.drawable.Drawable;
+
+/**
+ * Created by lordo on 08.03.2016.
+ */
+public class PojoForList {
+    private int id;
+    private String title;
+    private String subitem;
+    private Drawable drawable;
+
+    public PojoForList(int id, String title, String subitem, Drawable drawable) {
+        this.id = id;
+        this.title = title;
+        this.subitem = subitem;
+        this.drawable = drawable;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubitem() {
+        return subitem;
+    }
+
+    public void setSubitem(String subitem) {
+        this.subitem = subitem;
+    }
+
+    public Drawable getDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
+    }
+}
+/*
+@Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // задаем вид элемента списка, который мы создали высше
+        View view = inflater.inflate(R.layout.my_listview, parent, false);
+
+        // проставляем данные для элементов
+        TextView title = (TextView) view.findViewById(R.id.title);
+        TextView subitem = (TextView) view.findViewById(R.id.time);
+        ImageView thumbImage = (ImageView) view.findViewById(R.id.imageView);
+
+        // получаем элемент со списка
+        PojoForList objectItem = data.get(position);
+
+        // устанавливаем значения компонентам одного эелемента списка
+        title.setText(objectItem.getTitle());
+        subitem.setText(objectItem.getSubitem());
+        thumbImage.setImageDrawable(objectItem.getDrawable());
+
+        return view;
+    }
+ */
