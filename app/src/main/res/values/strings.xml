@@ -9,7 +9,7 @@
     <string name="Like">Улюблене</string>
     <string name="action">Action</string>
     <string name="Find_on_maps">Find on Maps</string>
-    <string name="title_activity_maps">Res1</string>
+    <string name="title_activity_maps">Карта Сер</string>
     <string name="title_activity_main">Ресторани Львова</string>
     <string name="map">Карта</string>
 </resources>
