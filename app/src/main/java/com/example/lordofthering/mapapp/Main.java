@@ -38,7 +38,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     Toolbar toolbar;
     static Drawable draw;
     Intent intent;
-
+    static ArrayList<String> geomanser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,9 +96,10 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         maps = new ArrayList<>();
         for(int i = 1 ;i < 45 ;i++) {
             getC().moveToPosition(i);
+            geomanser.add(getC().getString(7) + "}" + getC().getString(1));
             PojoForList objectItem1 = new PojoForList(i,
                     getC().getString(1), getC().getString(2),
-                    images.getDrawable(i-1));
+                    images.getDrawable(i - 1));
             maps.add(objectItem1);
         }
         return maps;
@@ -125,6 +126,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //toolbar.setLogo(R.drawable.ic_dining);
+        geomanser = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
         Resources res = getResources();
@@ -140,6 +142,10 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     public void setC(Cursor c) {
         this.c = c;
     }
-
-
+    public static ArrayList<String> getGeomanser() {
+        return geomanser;
+    }
+    public static void setGeomanser(ArrayList<String> geomanser) {
+        Main.geomanser = geomanser;
+    }
 }

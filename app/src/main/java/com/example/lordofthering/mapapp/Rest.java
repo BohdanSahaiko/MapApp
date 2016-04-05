@@ -96,6 +96,7 @@ public class Rest extends AppCompatActivity {
                 http.setText("Офіційний сайт: \n" + Main.getC().getString(6));
                 Linkify.addLinks(http, Linkify.ALL);
             }
+
             setGeo(Main.getC().getString(7));
             Toast.makeText(Rest.this, Main.getC().getString(1), Toast.LENGTH_SHORT).show();
         }

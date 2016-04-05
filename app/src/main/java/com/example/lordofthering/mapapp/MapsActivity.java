@@ -2,45 +2,31 @@ package com.example.lordofthering.mapapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.MenuItem;
 
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
 public class MapsActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback {
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -70,11 +56,16 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         getMenuInflater().inflate(R.menu.menu_maps, menu);
         return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onMapReady(GoogleMap map) {
-        LatLng raf = new LatLng(49.8382395, 24.0307135);
-
+        LatLng raf;
+        raf = new LatLng(49.8382395, 24.0307135);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(raf, 13));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -86,12 +77,20 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             return;
         }
         map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(raf, 13));
 
-        map.addMarker(new MarkerOptions()
-                .title("Rafinad People")
-                .snippet("Руданського 1")
-                .position(raf));
+        for (String i : Main.getGeomanser()  ) {
+
+            int r = i.indexOf(",");
+            int n = i.indexOf("}");
+            double rs = Double.parseDouble(i.substring(4, r));
+            double ns = Double.parseDouble(i.substring(r+1,n-1));
+            String nameofrest = i.substring(n+1,i.length());
+            raf = new LatLng(rs, ns);
+            map.addMarker(new MarkerOptions()
+                    .title(nameofrest)
+                    .position(raf));
+        }
+
     }
 }
 
