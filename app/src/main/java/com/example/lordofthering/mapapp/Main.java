@@ -94,9 +94,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
     public ArrayList<PojoForList> initData() {
         maps = new ArrayList<>();
-        for(int i = 1 ;i < 45 ;i++) {
+        for(int i = 1 ;i < 55 ;i++) {
             getC().moveToPosition(i);
-            geomanser.add(getC().getString(7) + "}" + getC().getString(1));
+            geomanser.add(getC().getString(7) + "}" + getC().getString(1)+ "№" + getC().getString(2));
             PojoForList objectItem1 = new PojoForList(i,
                     getC().getString(1), getC().getString(2),
                     images.getDrawable(i - 1));

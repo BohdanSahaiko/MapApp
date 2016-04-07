@@ -19,7 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback {
-    Toolbar toolbar;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,27 +31,21 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
     @Override
     public void onLocationChanged(Location loc) {
-
     }
-
     @Override
     public void onProviderDisabled(String provider) {
         // TODO Auto-generated method stub
     }
-
     @Override
     public void onProviderEnabled(String provider) {
         // TODO Auto-generated method stub
     }
-
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO Auto-generated method stub
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_maps, menu);
         return true;
@@ -60,7 +54,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     public void onMapReady(GoogleMap map) {
         LatLng raf;
@@ -77,17 +70,17 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             return;
         }
         map.setMyLocationEnabled(true);
-
-        for (String i : Main.getGeomanser()  ) {
-
+        for (String i : Main.getGeomanser()) {
             int r = i.indexOf(",");
             int n = i.indexOf("}");
+            int nom = i.indexOf("№");
             double rs = Double.parseDouble(i.substring(4, r));
-            double ns = Double.parseDouble(i.substring(r+1,n-1));
-            String nameofrest = i.substring(n+1,i.length());
+            double ns = Double.parseDouble(i.substring(r + 1, n));
+            String nameofrest = i.substring(n + 1, nom);
+            String subtext = i.substring(nom + 1, i.length());
             raf = new LatLng(rs, ns);
             map.addMarker(new MarkerOptions()
-                    .title(nameofrest)
+                    .title(nameofrest).snippet(subtext)
                     .position(raf));
         }
 
