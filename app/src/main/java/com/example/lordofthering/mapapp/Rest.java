@@ -31,19 +31,16 @@ public class Rest extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent intent;
-            intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(getGeo()));
-            startActivity(intent);
-            return true;
-        }
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; goto parent activity.
                 this.finish();
+                return true;
+            case R.id.action_settings:
+                Intent intent;
+                intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(getGeo()));
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

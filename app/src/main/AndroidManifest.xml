@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lordofthering.mapapp">
+
     <permission
         android:name="com.example.lordofthering.mapapp.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
@@ -8,7 +9,6 @@
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
-
     -->
     <uses-permission android:name="com.example.lordofthering.mapapp.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -41,26 +41,27 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".Main"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.lordofthering.mapapp.Main" />
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".Rest"
             android:label="@string/title_activity_rest"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Splashscrn">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lordofthering.mapapp.Splashscrn" />
+        </activity>
     </application>
 
 </manifest>

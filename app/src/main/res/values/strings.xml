@@ -12,4 +12,5 @@
     <string name="title_activity_maps">Карта Сер</string>
     <string name="title_activity_main">Ресторани Львова</string>
     <string name="map">Карта</string>
+    <string name="title_activity_blank">Blank</string>
 </resources>

@@ -55,7 +55,6 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
 
         // получаем элемент со списка
         PojoForList pojoForList = restList.get(position);
-
         // устанавливаем значения компонентам одного эелемента списка
         title.setText(pojoForList.getTitle());
         subitem.setText(pojoForList.getSubitem());

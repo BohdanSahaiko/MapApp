@@ -93,7 +93,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     }
 
     public ArrayList<PojoForList> initData() {
-        maps = new ArrayList<>();
+
         for(int i = 1 ;i < 55 ;i++) {
             getC().moveToPosition(i);
             geomanser.add(getC().getString(7) + "}" + getC().getString(1)+ "№" + getC().getString(2));
@@ -125,6 +125,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        maps = new ArrayList<>();
         //toolbar.setLogo(R.drawable.ic_dining);
         geomanser = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);
