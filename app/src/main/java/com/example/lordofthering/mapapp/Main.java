@@ -40,7 +40,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     Intent intent;
     static ArrayList<String> geomanser;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         connectDB();
@@ -94,9 +94,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
     public ArrayList<PojoForList> initData() {
 
-        for(int i = 1 ;i < 55 ;i++) {
+        for(int i = 1 ;i < 56 ;i++) {
             getC().moveToPosition(i);
-            geomanser.add(getC().getString(7) + "}" + getC().getString(1)+ "№" + getC().getString(2));
+            geomanser.add(getC().getString(7) + "}" + getC().getString(1) + "№" + getC().getString(2));
             PojoForList objectItem1 = new PojoForList(i,
                     getC().getString(1), getC().getString(2),
                     images.getDrawable(i - 1));

@@ -19,6 +19,6 @@ public class Splashscrn extends Activity {
                 startActivity(intent);
                 finish();
             }
-        },2*1000);
+        },2*1020);
     }
 }
