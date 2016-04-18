@@ -50,26 +50,3 @@ public class PojoForList {
         this.drawable = drawable;
     }
 }
-/*
-@Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        // задаем вид элемента списка, который мы создали высше
-        View view = inflater.inflate(R.layout.my_listview, parent, false);
-
-        // проставляем данные для элементов
-        TextView title = (TextView) view.findViewById(R.id.title);
-        TextView subitem = (TextView) view.findViewById(R.id.time);
-        ImageView thumbImage = (ImageView) view.findViewById(R.id.imageView);
-
-        // получаем элемент со списка
-        PojoForList objectItem = data.get(position);
-
-        // устанавливаем значения компонентам одного эелемента списка
-        title.setText(objectItem.getTitle());
-        subitem.setText(objectItem.getSubitem());
-        thumbImage.setImageDrawable(objectItem.getDrawable());
-
-        return view;
-    }
- */

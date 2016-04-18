@@ -80,7 +80,6 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -93,7 +92,6 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     }
 
     public ArrayList<PojoForList> initData() {
-
         for(int i = 1 ;i < 56 ;i++) {
             getC().moveToPosition(i);
             geomanser.add(getC().getString(7) + "}" + getC().getString(1) + "№" + getC().getString(2));

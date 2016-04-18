@@ -45,17 +45,13 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        // задаем вид элемента списка, который мы создали высше
         View view = inflater.inflate(R.layout.my_listview, parent, false);
-
-        // проставляем данные для элементов
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView subitem = (TextView) view.findViewById(R.id.time);
         ImageView thumbImage = (ImageView) view.findViewById(R.id.imageView);
 
-        // получаем элемент со списка
+        // get element from list
         PojoForList pojoForList = restList.get(position);
-        // устанавливаем значения компонентам одного эелемента списка
         title.setText(pojoForList.getTitle());
         subitem.setText(pojoForList.getSubitem());
         thumbImage.setImageDrawable(pojoForList.getDrawable());
@@ -118,7 +114,6 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint,
                                       FilterResults results) {
-
             // Now we have to inform the adapter about the new list filtered
             if (results.count == 0)
                 notifyDataSetInvalidated();
