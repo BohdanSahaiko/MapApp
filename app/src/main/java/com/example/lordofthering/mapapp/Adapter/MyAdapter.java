@@ -59,31 +59,25 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
         return view;
     }
 
+    public int getOriginListIndex(View ofView) {
+        String title = ((TextView) ofView.findViewById(R.id.title)).getText().toString().toUpperCase();
+        for (int i = 0 ; i < orignRestList.size(); i++) {
+            String oTitle = orignRestList.get(i).getTitle().toUpperCase();
+            if (oTitle.equals(title)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void resetData() {
         restList = orignRestList;
     }
 
-
-	/* *********************************
-	 * We use the holder pattern
-	 * It makes the view faster and avoid finding the component
-	 * **********************************/
-
-    private static class PlanetHolder {
-        public TextView planetNameView;
-        public TextView distView;
-    }
-
-
-
     @Override
     public Filter getFilter() {
-
-
         return new RestFilter();
     }
-
-
 
     private class RestFilter extends Filter {
         @Override
@@ -100,7 +94,8 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
                 List<PojoForList> nRestList = new ArrayList<>();
 
                 for (PojoForList p : restList) {
-                    if (p.getTitle().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                    if (p.getTitle().toUpperCase().indexOf(constraint.toString().toUpperCase())>=0
+                || p.getSubitem().toUpperCase().indexOf(constraint.toString().toUpperCase())>=0)
                         nRestList.add(p);
                 }
 

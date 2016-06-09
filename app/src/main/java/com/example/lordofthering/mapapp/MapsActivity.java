@@ -1,11 +1,12 @@
 package com.example.lordofthering.mapapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,12 +19,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
-public class MapsActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements  OnMapReadyCallback {
     private Toolbar toolbar;
+    LatLng latLng;
+    GoogleMap mMap;
+    double lat, lng;
+    double min = 1000000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,25 +39,11 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-    @Override
-    public void onLocationChanged(Location loc) {
-    }
-    @Override
-    public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
-    }
-    @Override
-    public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
-    }
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
-    }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_maps, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -60,11 +51,12 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 this.finish();
                 return true;
             case R.id.action_mapss:
-               Toast.makeText(MapsActivity.this, "Dont ready", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapsActivity.this,"Найближчий ресторан:"+ " ,на відстані:"+(int) min + " Метрів", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onMapReady(GoogleMap map) {
         LatLng raf;
@@ -74,6 +66,15 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             return;
         }
         map.setMyLocationEnabled(true);
+        LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        Location location = locationManager.getLastKnownLocation(locationManager
+                .getBestProvider(criteria, false));
+        lat = location.getLatitude();
+        lng = location.getLongitude();
+        LatLng mycoor= new LatLng(lat,lng);
+
         for (String i : Main.getGeomanser()) {
             int r = i.indexOf(",");
             int n = i.indexOf("}");
@@ -86,11 +87,9 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             map.addMarker(new MarkerOptions()
                     .title(nameofrest).snippet(subtext)
                     .position(raf));
+            double distanceBetween = SphericalUtil.computeDistanceBetween(mycoor,raf);
+            if(distanceBetween<min) min = distanceBetween;
         }
 
     }
 }
-
-
-
-

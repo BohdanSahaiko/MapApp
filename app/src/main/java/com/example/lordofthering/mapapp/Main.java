@@ -46,7 +46,6 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         connectDB();
         init();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -86,13 +85,14 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent = new Intent(this, Rest.class);
-        setN(position + 2);
-        draw = images.getDrawable(position);
+        int p = ((MyAdapter)adapter).getOriginListIndex(view);
+        setN(p + 2);
+        draw = images.getDrawable(p);
         startActivity(intent);
     }
 
     public ArrayList<PojoForList> initData() {
-        for(int i = 1 ;i < 56 ;i++) {
+        for(int i = 1 ;i < 20 ;i++) {
             getC().moveToPosition(i);
             geomanser.add(getC().getString(7) + "}" + getC().getString(1) + "№" + getC().getString(2));
             PojoForList objectItem1 = new PojoForList(i,

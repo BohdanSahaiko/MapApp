@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.lordofthering.lviv.Main">
     <item
-        android:id="@+id/action_settingsss"
-        android:orderInCategory="100"
-        android:title="@string/Like"
-        app:showAsAction="never" />
-
-    <item
     android:id="@+id/action_map"
     android:orderInCategory="100"
     android:title="@string/Find_on_maps"
