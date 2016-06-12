@@ -33,7 +33,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     public DatabaseHelper myDbHelper;
     ListView listView;
     private ArrayAdapter adapter;
-    static TypedArray images;
+    static TypedArray images,image;
     static ArrayList<PojoForList> maps;
     Toolbar toolbar;
     static Drawable draw;
@@ -87,17 +87,17 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         intent = new Intent(this, Rest.class);
         int p = ((MyAdapter)adapter).getOriginListIndex(view);
         setN(p + 2);
-        draw = images.getDrawable(p);
+        draw = image.getDrawable(p);
         startActivity(intent);
     }
 
     public ArrayList<PojoForList> initData() {
-        for(int i = 1 ;i < 20 ;i++) {
+        for(int i = 1 ;i < 72 ;i++) {
             getC().moveToPosition(i);
             geomanser.add(getC().getString(7) + "}" + getC().getString(1) + "№" + getC().getString(2));
             PojoForList objectItem1 = new PojoForList(i,
                     getC().getString(1), getC().getString(2),
-                    images.getDrawable(i - 1));
+                    images.getDrawable(i-1));
             maps.add(objectItem1);
         }
         return maps;
@@ -129,7 +129,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
         Resources res = getResources();
-        images = res.obtainTypedArray(R.array.images);
+        images = res.obtainTypedArray(R.array.images_mini);
+        image = res.obtainTypedArray(R.array.images);
         adapter = new MyAdapter(initData(), this);
         listView.setAdapter(adapter);
     }

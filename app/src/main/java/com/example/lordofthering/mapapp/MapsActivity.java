@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -23,12 +22,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 
-public class MapsActivity extends AppCompatActivity implements  OnMapReadyCallback {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Toolbar toolbar;
-    LatLng latLng;
-    GoogleMap mMap;
+    String name;
     double lat, lng;
     double min = 1000000;
+    List<LatLng> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,27 @@ public class MapsActivity extends AppCompatActivity implements  OnMapReadyCallba
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        list = new ArrayList();
     }
+
+    void funk() {
+        LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {return;}
+        Location location = locationManager.getLastKnownLocation(locationManager
+                .getBestProvider(criteria, false));
+        lat = location.getLatitude();
+        lng = location.getLongitude();
+        LatLng mycoor= new LatLng(lat,lng);
+        for(LatLng lng:list){
+        double distanceBetween = SphericalUtil.computeDistanceBetween(mycoor,lng);
+        if(distanceBetween<min) {
+          //  name = nameofrest;
+            min = distanceBetween;
+        }
+        }
+}
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_maps, menu);
         return true;
@@ -51,7 +73,8 @@ public class MapsActivity extends AppCompatActivity implements  OnMapReadyCallba
                 this.finish();
                 return true;
             case R.id.action_mapss:
-                Toast.makeText(MapsActivity.this,"Найближчий ресторан:"+ " ,на відстані:"+(int) min + " Метрів", Toast.LENGTH_SHORT).show();
+                funk();
+                Toast.makeText(MapsActivity.this,"Найближчий ресторан:"+ name +" ,на відстані:"+(int) min + " метри", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -66,15 +89,6 @@ public class MapsActivity extends AppCompatActivity implements  OnMapReadyCallba
             return;
         }
         map.setMyLocationEnabled(true);
-        LocationManager locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        Location location = locationManager.getLastKnownLocation(locationManager
-                .getBestProvider(criteria, false));
-        lat = location.getLatitude();
-        lng = location.getLongitude();
-        LatLng mycoor= new LatLng(lat,lng);
-
         for (String i : Main.getGeomanser()) {
             int r = i.indexOf(",");
             int n = i.indexOf("}");
@@ -87,8 +101,7 @@ public class MapsActivity extends AppCompatActivity implements  OnMapReadyCallba
             map.addMarker(new MarkerOptions()
                     .title(nameofrest).snippet(subtext)
                     .position(raf));
-            double distanceBetween = SphericalUtil.computeDistanceBetween(mycoor,raf);
-            if(distanceBetween<min) min = distanceBetween;
+            list.add(raf);
         }
 
     }
