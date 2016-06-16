@@ -3,13 +3,11 @@
     <string name="action_settings">Google Maps</string>
     <string name="search_hint">search</string>
     <string name="title_activity_rest">Rest</string>
-    <string name="like">Добавлено в  улюблене</string>
     <string name="DatabaseError">Unable to create database</string>
     <string name="next">Наступні ресторани »</string>
-    <string name="Like">Улюблене</string>
     <string name="action">Action</string>
     <string name="Find_on_maps">Find on Maps</string>
-    <string name="title_activity_maps">Карта Сер</string>
+    <string name="title_activity_maps">Карта Львова</string>
     <string name="title_activity_main">Ресторани Львова</string>
     <string name="map">Карта</string>
     <string name="title_activity_blank">Blank</string>

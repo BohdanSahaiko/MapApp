@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Rest extends AppCompatActivity {
+public class RestaurantInformationActivity extends AppCompatActivity {
     TextView address, numbers, ops, timework, http;
     String geo;
     Toolbar toolbar;
@@ -52,9 +52,9 @@ public class Rest extends AppCompatActivity {
         timework = (TextView) findViewById(R.id.time);
         http = (TextView) findViewById(R.id.http);
         ImageView image = (ImageView) findViewById(R.id.imageRestView);
-        image.setImageDrawable(Main.draw);
-        if (Main.getC().moveToPosition(Main.getN() - 1)) {
-            String s = Main.getC().getString(1);
+        image.setImageDrawable(MainActivity.draw);
+        if (MainActivity.getC().moveToPosition(MainActivity.getN() - 1)) {
+            String s = MainActivity.getC().getString(1);
             int p ;
             int r ;
             if (s != null && s.indexOf("«") > -1) {
@@ -62,11 +62,11 @@ public class Rest extends AppCompatActivity {
                 r = s.indexOf("»");
                 String str = s.substring(p + 1, r);
                 getSupportActionBar().setTitle(str);
-            } else getSupportActionBar().setTitle(Main.getC().getString(1));
+            } else getSupportActionBar().setTitle(MainActivity.getC().getString(1));
 
-            address.setText("Адреса: " + Main.getC().getString(2));
+            address.setText("Адреса: " + MainActivity.getC().getString(2));
             if (numbers != null) {
-                numbers.setText("Номер телефону: \n" + Main.getC().getString(3));
+                numbers.setText("Номер телефону: \n" + MainActivity.getC().getString(3));
                 int i;
                 if ((i = numbers.getText().toString().indexOf(",")) > -1) {
                     String txt = numbers.getText().toString().toString();
@@ -74,15 +74,15 @@ public class Rest extends AppCompatActivity {
                 }
                 Linkify.addLinks(numbers, Linkify.ALL);
             }
-            ops.setText("Опис: " + Main.getC().getString(4));
-            timework.setText(Main.getC().getString(5));
+            ops.setText("Опис: " + MainActivity.getC().getString(4));
+            timework.setText(MainActivity.getC().getString(5));
             if (http != null) {
-                http.setText("Офіційний сайт: \n" + Main.getC().getString(6));
+                http.setText("Офіційний сайт: \n" + MainActivity.getC().getString(6));
                 Linkify.addLinks(http, Linkify.ALL);
             }
 
-            setGeo(Main.getC().getString(7));
-            Toast.makeText(Rest.this, Main.getC().getString(1), Toast.LENGTH_SHORT).show();
+            setGeo(MainActivity.getC().getString(7));
+            Toast.makeText(RestaurantInformationActivity.this, MainActivity.getC().getString(1), Toast.LENGTH_SHORT).show();
         }
     }
 

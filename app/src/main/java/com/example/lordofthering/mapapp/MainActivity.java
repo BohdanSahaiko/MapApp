@@ -27,7 +27,7 @@ import com.example.lordofthering.mapapp.DataBase.DatabaseHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Main extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     static int n;
     public static Cursor c = null;
     public DatabaseHelper myDbHelper;
@@ -50,7 +50,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager = (SearchManager) Main.this.getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) MainActivity.this.getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = null;
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
@@ -67,7 +67,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
             });
         }
         if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(Main.this.getComponentName()));
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainActivity.this.getComponentName()));
         }
         return true;
     }
@@ -84,7 +84,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        intent = new Intent(this, Rest.class);
+        intent = new Intent(this, RestaurantInformationActivity.class);
         int p = ((MyAdapter)adapter).getOriginListIndex(view);
         setN(p + 2);
         draw = image.getDrawable(p);
@@ -105,7 +105,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
     private void connectDB()
     {
-        myDbHelper = new DatabaseHelper(Main.this);
+        myDbHelper = new DatabaseHelper(MainActivity.this);
         try {
             myDbHelper.createDataBase();
         } catch (IOException ioe) {
@@ -124,7 +124,6 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         maps = new ArrayList<>();
-        //toolbar.setLogo(R.drawable.ic_dining);
         geomanser = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
@@ -146,6 +145,6 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         return geomanser;
     }
     public static void setGeomanser(ArrayList<String> geomanser) {
-        Main.geomanser = geomanser;
+        MainActivity.geomanser = geomanser;
     }
 }

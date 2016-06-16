@@ -3,7 +3,6 @@ package com.example.lordofthering.mapapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class Splashscrn extends Activity {
@@ -15,7 +14,7 @@ public class Splashscrn extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splashscrn.this,Main.class);
+                Intent intent = new Intent(Splashscrn.this,MainActivity.class);
                 startActivity(intent);
                 finish();
             }

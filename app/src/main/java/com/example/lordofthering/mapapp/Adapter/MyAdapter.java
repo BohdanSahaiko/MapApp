@@ -70,10 +70,6 @@ public class MyAdapter extends ArrayAdapter<PojoForList> implements Filterable {
         return -1;
     }
 
-    public void resetData() {
-        restList = orignRestList;
-    }
-
     @Override
     public Filter getFilter() {
         return new RestFilter();

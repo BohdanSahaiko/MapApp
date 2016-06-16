@@ -43,12 +43,12 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".Main"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".Rest"
+            android:name=".RestaurantInformationActivity"
             android:label="@string/title_activity_rest"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Splashscrn">
