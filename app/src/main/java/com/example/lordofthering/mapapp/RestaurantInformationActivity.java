@@ -1,9 +1,16 @@
 package com.example.lordofthering.mapapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.view.Menu;
@@ -16,6 +23,7 @@ public class RestaurantInformationActivity extends AppCompatActivity {
     TextView address, numbers, ops, timework, http;
     String geo;
     Toolbar toolbar;
+    CollapsingToolbarLayout appBarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +53,9 @@ public class RestaurantInformationActivity extends AppCompatActivity {
     {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.inflateMenu(R.menu.menu_rest);
+        ActionBar actionBar= getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         address = (TextView) findViewById(R.id.address);
         numbers = (TextView) findViewById(R.id.number);
         ops = (TextView) findViewById(R.id.ops);
@@ -53,6 +63,9 @@ public class RestaurantInformationActivity extends AppCompatActivity {
         http = (TextView) findViewById(R.id.http);
         ImageView image = (ImageView) findViewById(R.id.imageRestView);
         image.setImageDrawable(MainActivity.draw);
+        appBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        Context context = this;
+        appBarLayout.setContentScrimColor(ContextCompat.getColor(context,R.color.primary_dark));
         if (MainActivity.getC().moveToPosition(MainActivity.getN() - 1)) {
             String s = MainActivity.getC().getString(1);
             int p ;
@@ -61,7 +74,7 @@ public class RestaurantInformationActivity extends AppCompatActivity {
                 p = s.indexOf("«");
                 r = s.indexOf("»");
                 String str = s.substring(p + 1, r);
-                getSupportActionBar().setTitle(str);
+                appBarLayout.setTitle(str);
             } else getSupportActionBar().setTitle(MainActivity.getC().getString(1));
 
             address.setText("Адреса: " + MainActivity.getC().getString(2));

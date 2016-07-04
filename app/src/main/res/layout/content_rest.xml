@@ -7,6 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".RestaurantInformationActivity"
     tools:showIn="@layout/activity_rest">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,13 +17,9 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:id="@+id/imageRestView"
-                android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="230dp" />
-            <ImageView
-                android:layout_marginTop="231dp"
+                android:layout_marginTop="0dp"
                 android:id="@+id/address_image"
                 android:src="@drawable/ic_my_location_black_48dp"
                 android:layout_alignParentTop="true"
@@ -31,7 +28,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
             <TextView
-                android:layout_marginTop="230dp"
+                android:layout_marginTop="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -128,7 +125,6 @@
                 android:layout_alignParentStart="true"
                 android:textStyle="italic"
                 android:textColor="#000000" />
-
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

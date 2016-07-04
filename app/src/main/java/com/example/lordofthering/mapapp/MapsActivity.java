@@ -23,14 +23,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, android.location.LocationListener {
     private Toolbar toolbar;
-    String name,addres;
-    double min = 100000000;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +59,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 AlertDialog.Builder builderSingle = new AlertDialog.Builder(MapsActivity.this);
                 builderSingle.setTitle("Найближчі ресторани:-");
                 final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                    MapsActivity.this,
-                    android.R.layout.select_dialog_singlechoice);
+                        MapsActivity.this,
+                        android.R.layout.select_dialog_singlechoice);
                 for (int i = 0; i < addreses.size(); i++) {
-                    arrayAdapter.add(names.get(i) + ", за адресою:"+ addreses.get(i) +" ,на відстані:" + mins.get(i) + " метри");
+                    arrayAdapter.add(names.get(i) + ", за адресою:" + addreses.get(i) + " ,на відстані:" + mins.get(i) + " метри");
                 }
                 builderSingle.setNegativeButton(
                         "Вихід",
@@ -81,7 +81,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 AlertDialog.Builder builderInner = new AlertDialog.Builder(
                                         MapsActivity.this);
                                 builderInner.setMessage(strName);
-                                builderInner.setTitle("Your Selected Item is");
+                                builderInner.setTitle("Вибране:");
                                 builderInner.setPositiveButton(
                                         "Ok",
                                         new DialogInterface.OnClickListener() {
@@ -100,6 +100,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onMapReady(GoogleMap map) {
         LatLng raf;
@@ -110,7 +111,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         map.setMyLocationEnabled(true);
         for (String i : MainActivity.getGeomanser()) {
-            LHelper  lHelper = new LHelper(i);
+            LHelper lHelper = new LHelper(i);
             map.addMarker(new MarkerOptions()
                     .title(lHelper.nameofrest).snippet(lHelper.subtext)
                     .position(lHelper.rest));
@@ -118,6 +119,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     ArrayList<String> addreses;
+
     public void setAddres(String addres) {
         addreses.add(addres);
     }
@@ -127,10 +129,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     ArrayList<String> names;
+
     public void setName(String name) {
         names.add(name);
     }
+
     ArrayList<Double> mins;
+
     public void setMin(double min) {
         mins.add(min);
     }
@@ -139,10 +144,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
+
+        String provider = locationManager.getBestProvider(criteria, true);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        String provider = locationManager.getBestProvider(criteria, true);
         Location location = locationManager.getLastKnownLocation(locationManager
                 .getBestProvider(criteria, false));
         if (location != null) {
